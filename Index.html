@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Waachak</title>
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/ng-waachak-main.js"></script>
+    <script src="scripts/ng-waachak-subscriptions.js"></script>
+    <script src="scripts/ng-waachak-login.js"></script>
+
+    <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <script type="text/javascript" async="true" src="https://apis.google.com/js/client:plusone.js?onload=render"></script>
+    <link href="Styles/common.css" rel="stylesheet" type="text/css">
+    <script src="scripts/DnD.js"></script>
+    <script src="//connect.facebook.net/en_US/all.js"></script>
+    <link rel="shortcut icon" href="/images/icon.jpg" />
+    <script src="scripts/jquery-1.10.2.min.js"></script>
+
+    <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <script src="scripts/signIn.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var fbCode = getParameterByName("code");
+                        
+            var userIDCookie = readCookie("userIDcookie");
+            var authTokencookie = readCookie("authTokencookie");
+            var UserNamecookie = readCookie("UserNamecookie");
+            var userImageUrlcookie = readCookie("userImageUrlcookie");
+            
+            autoLogin(userIDCookie, authTokencookie, UserNamecookie, userImageUrlcookie, fbCode);
+
+        });
+    </script>
+    </head>
+<body>
+   <div ng-app="waachakApp">
+            <div ng-controller="mainController">
+                <link href="{{theme}}" rel="stylesheet" type="text/css">
+                <div class="header">
+                    <div class="logo">waachak</div>
+                    <div ng-show="waachakFactory.showFilter() && waachakFactory.showFeedDiscoveryDialog() == ''" class="feedSearch">
+
+                        <input type="text" ng-model="feedSearchText" id="feedSearch" />
+                        <div class="msg">Type above to filter listed items</div>
+                    </div>
+                    <div id="gSignInWrapper" style="display:inline-block;float:right;">
+                        <div id="loggedOnUser" class="loggedOn" >
+                            <input type="hidden" id="authToken" value="{{user.authToken}}" />
+
+                            <div class="userName" style="margin-top:22px;" ng-hide="user.userImageUrl=='aaa' || user.userImageUrl==''">
+                                <img src="{{user.userImageUrl}}" class="userImage" />
+                            </div>
+                            <div class="userName" style="margin-top:28px;">{{user.userName}}</div>
+                        </div>
+                    </div>
+                
+                </div>
+                                     
+               <div id="fb-root"></div>
+
+                <div id="divSubscriptions">
+
+                </div>
+    
+                <div ng-view>
+
+                </div>
+                <div class="waachakAbout" id="about">
+                    <div>
+                        <img src="Images/close.png" style="width: 20px;  float:right;" ng-click="showHideAbout('none')" />
+                        <br /><br />
+                        <span style="width:80%;">
+                            <strong>About</strong>
+                            <br />
+                            Waachak (meaning reader in Hindi language) is a free RSS Reader service. Enjoy!
+                            <br /><br />
+                            <strong>Application</strong>
+                            <br />
+                            This RSS reader is using AngularJS and .Net Web APIs with SQL Server as the backend database.
+                            The complete source code can be downloaded free at Github <a style="color:blue;" target="_blank" href="https://github.com/waachak">here</a>.
+                            <br /><br />
+                            <strong>Why another reader?</strong>
+                            <br />
+                            Just because... I was playing with AngularJS and ended up building this application. It has been a lot of fun!
+                            <br /><br />
+                            <strong>Contact</strong>
+                            <br />
+                            You can send <a style="color:blue;" target="_blank" href="mailto:rss.waachak@gmail.com">email</a> to request for new features, suggestions for improvement or provide any feedback.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <div id="divThemeSelector" class="themeSelector">
+                        <div ng-click="setTheme(1)" style="{{getThemeFontWeight('Styles/common.css')}}">Aakasha Theme</div>
+                        <div ng-click="setTheme(2)" style="{{getThemeFontWeight('Styles/office.css'); }}">Satva Theme</div>
+                        <div ng-click="setTheme(3)" style="{{getThemeFontWeight('Styles/brown.css'); }}">Yoga Theme</div>
+                    </div>
+                    
+                    <span ng-click="showHideAbout('block')">About</span>
+
+                    <span class="setTheme"  ng-click="setTheme(0)" ng-hide="user.userName==''">Set Theme</span>
+                </div>
+            </div>       
+        </div>
+</body>
+</html>

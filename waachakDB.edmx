@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="waachDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'db0ea90c7252404415a17da2030019b309.dbo.DefaultFeeds' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DefaultFeeds">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="feedurl" Type="nvarchar" MaxLength="2048" />
+          <Property Name="isCategory" Type="int" />
+          <Property Name="sortIndicator" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="FeedItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="1024" Nullable="false" />
+          <Property Name="link" Type="varchar" MaxLength="2048" />
+          <Property Name="pubDate" Type="varchar" MaxLength="128" />
+          <Property Name="guid" Type="varchar" MaxLength="2048" />
+          <Property Name="userID" Type="varchar" MaxLength="50" />
+          <Property Name="savedForReading" Type="int" />
+          <Property Name="feedName" Type="nvarchar" MaxLength="512" />
+        </EntityType>
+        <EntityType Name="Subscription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Url" Type="varchar(max)" Nullable="false" />
+          <Property Name="IsFolder" Type="int" />
+          <Property Name="ParentFolder" Type="int" />
+          <Property Name="SortNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="WaachakUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User Name" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="UserPassword" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserToken" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserEmail" Type="nchar" MaxLength="512" />
+        </EntityType>
+        <EntityContainer Name="waachDBModelStoreContainer">
+          <EntitySet Name="FeedItem" EntityType="Self.FeedItem" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Subscription" EntityType="Self.Subscription" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="WaachakUser" EntityType="Self.WaachakUser" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="DefaultFeeds" EntityType="Self.DefaultFeeds" p3:Type="Tables" p3:Schema="dbo" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
+            <DefiningQuery>SELECT 
+[DefaultFeeds].[id] AS [id], 
+[DefaultFeeds].[name] AS [name], 
+[DefaultFeeds].[feedurl] AS [feedurl], 
+[DefaultFeeds].[isCategory] AS [isCategory], 
+[DefaultFeeds].[sortIndicator] AS [sortIndicator]
+FROM [dbo].[DefaultFeeds] AS [DefaultFeeds]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="waachDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FeedItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="link" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="pubDate" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="guid" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Name="userID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="savedForReading" />
+          <Property Type="String" Name="feedName" MaxLength="512" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Subscription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Type="Int32" Name="IsFolder" />
+          <Property Type="Int32" Name="ParentFolder" />
+          <Property Type="Int32" Name="SortNumber" />
+        </EntityType>
+        <EntityType Name="WaachakUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserID" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Type="String" Name="UserPassword" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UserToken" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UserEmail" MaxLength="512" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="waachakDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FeedItems" EntityType="Self.FeedItem" />
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscription" />
+          <EntitySet Name="WaachakUsers" EntityType="Self.WaachakUser" />
+          <EntitySet Name="DefaultFeeds" EntityType="waachDBModel.DefaultFeed" />
+        </EntityContainer>
+        <EntityType Name="DefaultFeed">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="feedurl" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="isCategory" />
+          <Property Type="String" Name="sortIndicator" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="waachDBModelStoreContainer" CdmEntityContainer="waachakDBEntities">
+          <EntitySetMapping Name="FeedItems">
+            <EntityTypeMapping TypeName="waachDBModel.FeedItem">
+              <MappingFragment StoreEntitySet="FeedItem">
+                <ScalarProperty Name="feedName" ColumnName="feedName" />
+                <ScalarProperty Name="savedForReading" ColumnName="savedForReading" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="link" ColumnName="link" />
+                <ScalarProperty Name="pubDate" ColumnName="pubDate" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscriptions">
+            <EntityTypeMapping TypeName="waachDBModel.Subscription">
+              <MappingFragment StoreEntitySet="Subscription">
+                <ScalarProperty Name="SortNumber" ColumnName="SortNumber" />
+                <ScalarProperty Name="ParentFolder" ColumnName="ParentFolder" />
+                <ScalarProperty Name="IsFolder" ColumnName="IsFolder" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WaachakUsers">
+            <EntityTypeMapping TypeName="waachDBModel.WaachakUser">
+              <MappingFragment StoreEntitySet="WaachakUser">
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserToken" ColumnName="UserToken" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="User_Name" ColumnName="User Name" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DefaultFeeds">
+            <EntityTypeMapping TypeName="waachDBModel.DefaultFeed">
+              <MappingFragment StoreEntitySet="DefaultFeeds">
+                <ScalarProperty Name="sortIndicator" ColumnName="sortIndicator" />
+                <ScalarProperty Name="isCategory" ColumnName="isCategory" />
+                <ScalarProperty Name="feedurl" ColumnName="feedurl" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

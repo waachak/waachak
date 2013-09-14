@@ -1,0 +1,37 @@
+﻿body {
+    background-color:white;
+}
+
+/* header */
+.header {
+    background:#efefef;
+}
+
+.header2 {
+    background:white;
+}
+
+.userName {
+    color:gray;
+}
+
+.feedSearch #msg {
+        color:black;
+    }
+
+.logo {
+    color:gray;
+}
+
+.feedItemTitleRead {
+    background-color:rgba(243,243,243,1.0);
+    border-bottom:1px solid #e5e5e5;
+}
+
+.footer {
+     background-color:white;
+ }
+
+.msg {
+    color:gray;
+} 

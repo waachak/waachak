@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="waachDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'db0ea90c7252404415a17da2030019b309.dbo.DefaultFeeds' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DefaultFeeds">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="512" Nullable="false" />
+    <Property Name="feedurl" Type="nvarchar" MaxLength="2048" />
+    <Property Name="isCategory" Type="int" />
+    <Property Name="sortIndicator" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="FeedItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="1024" Nullable="false" />
+    <Property Name="link" Type="varchar" MaxLength="2048" />
+    <Property Name="pubDate" Type="varchar" MaxLength="128" />
+    <Property Name="guid" Type="varchar" MaxLength="2048" />
+    <Property Name="userID" Type="varchar" MaxLength="50" />
+    <Property Name="savedForReading" Type="int" />
+    <Property Name="feedName" Type="nvarchar" MaxLength="512" />
+  </EntityType>
+  <EntityType Name="Subscription">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="512" Nullable="false" />
+    <Property Name="Url" Type="varchar(max)" Nullable="false" />
+    <Property Name="IsFolder" Type="int" />
+    <Property Name="ParentFolder" Type="int" />
+    <Property Name="SortNumber" Type="int" />
+  </EntityType>
+  <EntityType Name="WaachakUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User Name" Type="nvarchar" MaxLength="512" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="512" Nullable="false" />
+    <Property Name="UserPassword" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserToken" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserEmail" Type="nchar" MaxLength="512" />
+  </EntityType>
+  <EntityContainer Name="waachDBModelStoreContainer">
+    <EntitySet Name="FeedItem" EntityType="Self.FeedItem" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Subscription" EntityType="Self.Subscription" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="WaachakUser" EntityType="Self.WaachakUser" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DefaultFeeds" EntityType="Self.DefaultFeeds" p3:Type="Tables" p3:Schema="dbo" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
+      <DefiningQuery>SELECT 
+[DefaultFeeds].[id] AS [id], 
+[DefaultFeeds].[name] AS [name], 
+[DefaultFeeds].[feedurl] AS [feedurl], 
+[DefaultFeeds].[isCategory] AS [isCategory], 
+[DefaultFeeds].[sortIndicator] AS [sortIndicator]
+FROM [dbo].[DefaultFeeds] AS [DefaultFeeds]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

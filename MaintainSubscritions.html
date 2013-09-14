@@ -1,0 +1,98 @@
+﻿<div id="divNewSubscriptionForm" class="newsubscription" ng-show="showFeedDiscoveryDialog=='1'">
+    <div id="divSubPopUp">
+        <div>
+            <div ng-click="currentSubscriptionTab=1;secondTabTitle=''" class="{{currentTabStyle(1)}}">Subscriptions</div>
+            <div ng-click="currentSubscriptionTab=2" class="{{currentTabStyle(2)}}" ng-show="secondTabTitle!=''">{{secondTabTitle}}</div>
+            <div ng-click="currentSubscriptionTab=3;secondTabTitle='';getDefaultSubscriptions();" class="{{currentTabStyle(3)}}">Feed Discovery</div>
+
+            <div ng-click="showFeedDiscoveryDialog = ''" style="float:right; margin-top:-10px;">
+                <img src="Images/close.png" style="width: 20px;" ng-click="sortSubscriptions()" />
+            </div>
+        </div>
+        <div ng-show="currentSubscriptionTab == 1" class="currentTabContents">
+            <table style="width:100%;">
+                <thead>
+                    <tr class="tblHeader">
+                        <th style="text-align:left;width:35%;">Feed Name</th>
+                        <th style="text-align: left; width:55%;">Feed Url</th>
+                        <th style="width:5%;"><div class="add-record" ng-click="addEditSubscription('Add Subscription')"></div></th>
+                        <th style="width:5%;">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody class="tblbody" id="columns">
+                    <tr ng-repeat="s in subscriptions" draggable="true" id="columnRow" class="column">
+                        <td style="width:35%;" id="sortColName">{{s.name}}</td>
+                        <td style="width:55%;" id="sortColUrl">{{s.url}}<span style="display:none;" id="sortColID">{{s.ID}}</span></td>
+                        <td style="width:5%;">
+                            <div class="edit-pencil" ng-click="addEditSubscription('Edit Subscription', s)"></div>
+                        </td>
+                        <td style="width:5%;">
+                            <div class="delete-record" ng-click="deleteSubscription(s);"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-show="currentSubscriptionTab == 3" class="currentTabContents">
+            <table style="width:100%;">
+                <thead>
+                    <tr class="tblHeader">
+                        <th style="text-align:left;width:35%;">Known Feeds</th>
+                    </tr>
+                </thead>
+                <tbody class="tblbody">
+                    <tr ng-repeat="s in defaultSubscriptions">
+                        <td class="{{getDefaultFeedCSS(s.isCategory)}}">
+                            <div style="display:inline-block;width:200px; ">{{s.name}}</div>
+                            <div ng-show="s.isCategory == 0" class="{{isSubscribed(s.alreadySubscribed)}}" ng-click="addSubscriptionC(s)">Subscribe</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div ng-show="currentSubscriptionTab == 2" class="currentTabContents">
+
+            <table style="width:100%;">
+                <tr style="display:none;">
+                    <td>Create as folder?</td>
+                    <td>
+                        <input type="checkbox" ng-model="newSubscription.IsFolder">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:40%; text-align:right;">
+                        Name:
+                    </td>
+                    <td style="width:60%">
+                        <input type="text" ng-model="newSubscription.name" style="width:85%" />
+                    </td>
+                </tr>
+                <tr ng-hide="newSubscription.IsFolder == true">
+                    <td style="text-align: right;">Feed Url:</td>
+                    <td>
+                        <input type="text" ng-model="newSubscription.url" style="width:85%" />
+                    </td>
+                </tr>
+                <tr ng-hide="Folders==''">
+                    <td>Display under</td>
+                    <td>
+                        <select ng-model="newSubscription.ParentFolder" ng-options="obj.id as obj.name for obj in Folders">
+                            <option value="0">-- None --</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center;">
+                        <br />
+                        <input type="hidden" ng-model="newSubscription.ID" />
+                        <br />
+                        <div ng-click="addSubscriptionC(newSubscription);currentTabStyle(1);" class="blueButton" style="display:inline-block;">Save</div>
+
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>

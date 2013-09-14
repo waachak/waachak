@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db69949cb0e75447ccbb8fa1fe0166bb4fModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Subscription">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WaachakUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Name" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="waachakDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Subscriptions" EntityType="Self.Subscription" />
+    <EntitySet Name="WaachakUsers" EntityType="Self.WaachakUser" />
+    <EntitySet Name="FeedItems" EntityType="db69949cb0e75447ccbb8fa1fe0166bb4fModel.FeedItem" />
+  </EntityContainer>
+  <EntityType Name="FeedItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="title" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="link" MaxLength="2048" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="pubDate" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="guid" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="userID" MaxLength="512" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

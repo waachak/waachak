@@ -1,0 +1,14 @@
+C:\Projects\Wachak\bin\Wachak.dll.config
+C:\Projects\Wachak\bin\Wachak.dll
+C:\Projects\Wachak\bin\Wachak.pdb
+C:\Projects\Wachak\bin\EntityFramework.dll
+C:\Projects\Wachak\bin\System.Net.Http.Formatting.dll
+C:\Projects\Wachak\bin\System.Web.Http.dll
+C:\Projects\Wachak\bin\System.Web.Http.WebHost.dll
+C:\Projects\Wachak\bin\EntityFramework.xml
+C:\Projects\Wachak\bin\System.Net.Http.Formatting.xml
+C:\Projects\Wachak\bin\System.Web.Http.xml
+C:\Projects\Wachak\bin\System.Web.Http.WebHost.xml
+C:\Projects\Wachak\obj\Debug\Wachak.dll
+C:\Projects\Wachak\obj\Debug\Wachak.pdb
+C:\Projects\Wachak\bin\Newtonsoft.Json.dll

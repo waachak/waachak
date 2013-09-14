@@ -1,0 +1,127 @@
+﻿<div class="customBtn" ng-show="user.userName==''">
+    <table style="width:100%;">
+        <tr>
+            <td style="vertical-align: top;" class="waachakUserHeaderSignIn">
+                <div class="welcomeInfo">
+                    <div id="welcome">
+                        Welcome!
+                    </div>
+
+                    <div id="info">
+                        <br />
+                        Waachak (meaning reader in Hindi language) is a free RSS Reader service.
+                        <br /><br />
+                        You can try  waachak by signing in using one of the options listed on the right.
+                        <br />
+                        <br />
+                        We hope this service makes an enjoyable experience , customizing and reading your favourite RSS feeds. Enjoy!
+                    </div>
+                </div>
+            </td>
+
+            <td style="vertical-align: top; border-left: 3px solid white; border-right: 3px solid white;" class="waachakUserHeaderSignIn">
+                <div class="waachakUserHeaderSignIn">
+                    <div class="waachakUserHeader">
+                        Sign in using waachak account
+
+                        <div class="nonGoogleUser">
+                            <div>User Name or Email:</div>
+                            <div>
+                                <input id="nonGUserID" type="text" ng-model="nonGoogleUser.userID" />
+                            </div>
+                            <br />
+                            <div>Password:</div>
+                            <div>
+                                <input id="nonGUserPass" type="password" ng-keyup="signInKeyDown($event, nonGoogleUser)" ng-model="nonGoogleUser.userPassword" />
+                            </div>
+                            <div ng-hide="signup==''">Repeat Password:</div>
+                            <div ng-hide="signup==''">
+                                <input id="nonGUserPass2" type="password" ng-keyup="signInKeyDown($event, nonGoogleUser)" ng-model="nonGoogleUser.userPasswordRepeat" />
+                            </div>
+                            <div ng-hide="signup==''">Email:<span class="msg" style="color:black;"> (optional)</span></div>
+                            <div ng-hide="signup==''">
+                                <input id="nonGUserEmail" type="email" ng-model="nonGoogleUser.userEmail" />
+                            </div>
+                            <div>
+                                <br />
+                                <div ng-show="signup==''" class="blueButton"  ng-click="signInWaachakUser(nonGoogleUser)">Sign in</div>
+                                <div ng-hide="signup==''" class="blueButton" ng-click="addWaachakUser(nonGoogleUser)">Sign up</div>
+                                <div ng-show="signup==''">
+                                    <br />
+                                    Forgot password?&nbsp;<a href="" ng-click="resetPassword = 'reset'" style="text-decoration:none;"><i>reset password...</i></a>
+                                    <br /><br />
+                                    New user? &nbsp;<a href="" ng-click="newUserSignUp()" style="text-decoration:none;"><i>sign up...</i></a>
+                                </div>
+                                <div ng-hide="signup==''">
+                                    <br />
+                                    <a href="" ng-click="signup=''" style="text-decoration:none;"><i>Wait... login using waachak account</i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td style="vertical-align:top;" class="waachakUserHeaderSignIn">
+                <div class="waachakUserHeader" style="text-align:center;">
+                    Sign in using external account
+
+                    <div id="customBtn">
+                        <img ng-show="user.userName==''" src="Images/Red-signin-Long-base-20dp.png"
+                             onmouseover="this.src='Images/Red-signin-Long-hover-20dp.png'"
+                             onmousedown="this.src = 'Images/Red-signin-Long-press-20dp.png'"
+                             ng-click="signInWithGoogleClicked()" />
+                    </div>
+
+                    <div>
+                        <img src="images/loginWithFacebook.png" ng-show="user.userName==''"
+                             style="width:300px; height:45px;" onclick="javascript:loginWithFaceBook();"></img>
+                    </div>
+                </div>
+
+                <div class="waachakUserHeaderSignIn">
+                    <div class="explorerUserHeader">
+                        Just explore without signing in
+
+                        <div class="nonGoogleUser" style="text-align:center;margin-left:30%;">
+                            <div class="blueButton" ng-click="signInAsExplorer()">Explore</div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="divResetPassword" ng-hide="user.resetPassword==''" class="resetPassword">
+
+    <div id="divPasswordInfo">
+        <img src="Images/close.png" style="width: 20px; padding:0px; float:right;" ng-click="user.resetPassword=''" />
+        <div class="resetPasswordHeader">
+            <img src="images/rss.png" style="width:25px;height:25px; margin-bottom:-5px; " />
+            Reset Password
+        </div>
+        <div style="border-top: 1px solid #efefef; width:100%;  height: 1px;">&nbsp;</div>
+        <br />
+        <table>
+            <tr>
+                <td>Registered email:</td>
+                <td>
+                    <input type="email" ng-model="resetEmail" style="width:250px;" ng-change="user.resetPasswordInfo=''" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <br />
+                    <div class="blueButton" style="width:150px;" ng-click="user.resetPasswordInfo='';sendResetPasswordEmail(resetEmail);">Reset password</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center;">
+                    <br />
+                    {{user.resetPasswordInfo}}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

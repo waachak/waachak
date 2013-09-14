@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db69949cb0e75447ccbb8fa1fe0166bb4fModelStoreContainer" CdmEntityContainer="waachakDBEntities">
+    <EntitySetMapping Name="Subscriptions">
+      <EntityTypeMapping TypeName="db69949cb0e75447ccbb8fa1fe0166bb4fModel.Subscription">
+        <MappingFragment StoreEntitySet="Subscription">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WaachakUsers">
+      <EntityTypeMapping TypeName="db69949cb0e75447ccbb8fa1fe0166bb4fModel.WaachakUser">
+        <MappingFragment StoreEntitySet="WaachakUser">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="User_Name" ColumnName="User Name" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FeedItems">
+      <EntityTypeMapping TypeName="db69949cb0e75447ccbb8fa1fe0166bb4fModel.FeedItem">
+        <MappingFragment StoreEntitySet="FeedItem">
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="pubDate" ColumnName="pubDate" />
+          <ScalarProperty Name="link" ColumnName="link" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

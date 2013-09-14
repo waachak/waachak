@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db69949cb0e75447ccbb8fa1fe0166bb4fModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="FeedItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="1024" />
+    <Property Name="link" Type="varchar" MaxLength="2048" />
+    <Property Name="pubDate" Type="varchar" MaxLength="1024" />
+    <Property Name="guid" Type="varchar(max)" />
+    <Property Name="userID" Type="varchar" MaxLength="512" />
+  </EntityType>
+  <EntityType Name="Subscription">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="512" Nullable="false" />
+    <Property Name="Url" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WaachakUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User Name" Type="varchar" MaxLength="1024" Nullable="false" />
+    <Property Name="UserID" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="db69949cb0e75447ccbb8fa1fe0166bb4fModelStoreContainer">
+    <EntitySet Name="FeedItem" EntityType="Self.FeedItem" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Subscription" EntityType="Self.Subscription" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="WaachakUser" EntityType="Self.WaachakUser" Schema="dbo" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+  </EntityContainer>
+</Schema>

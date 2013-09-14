@@ -1,0 +1,237 @@
+﻿<div class="header2" ng-hide="user.userName==''">
+    <div style="width:22%;display:inline-block;">
+        <div class="redButton" style="display:inline-block;" ng-click="waachakFactory.setShowFeedDiscoveryDialog('1')" onclick="javascript:getDraggableRows();">Subscriptions</div>
+        <div class="loadingAnimation" ng-hide="loading == ''">
+            <img src="Images/loading.gif" ng-hide="loading == ''" />
+            <span style="display:inline-block; position:fixed;z-index:99; left:20%; width:300px;" ng-hide="loading=='' || currentFeedUrl !='' || subscriptions.length > 0">
+                Loading data... please wait.
+            </span>
+        </div>
+    </div>
+
+    <div class="feedHeader" ng-show="feedData">
+        <div class="feedName" style="display:inline-block;">
+            <div ng-repeat="c in feedData.channel">
+                <a href="{{c.link}}" target="_blank">{{c.title}}</a>
+            </div>
+        </div>
+        <div style="display:inline-block;float:right;">
+            <div class="blueButton" ng-click="refresh()" style="float: right; margin-left: 10px; display: inline-block;">Refresh</div>
+            <div class="grayButton" ng-click="setListMagazine($event);"
+                 style="float:right;display:inline-block;width:85px;"
+                 ng-hide="feedData.items.length == 0">Show Cards</div>
+            <div class="grayButton" ng-click="setShowHideDesc($event)"
+                 style="float:right;display:inline-block;width:80px;"
+                 ng-hide="feedData.items.length == 0 || showMagazine != ''">Expand All</div>
+            <div class="grayButton" ng-click="showAllf($event)"
+                 style="float:right;display:inline-block;width:100px;" ng-hide="currentFeedUrl == 's'">Show all items</div>
+            <div class="darGrayButton" ng-click="markAllItemsAsRead()"
+                 style="float:right; margin-right:10px;" ng-hide="currentFeedUnreadCount == '' || currentFeedUnreadCount  == '0' || currentFeedUrl == 's'">Mark all as read</div>
+
+        </div>
+    </div>
+</div>   
+
+<table class="contentTable">
+    <tr ng-hide="subscriptions.length > 0">
+        <td style="width: 25%; vertical-align: top;">
+            <div ng-show="loading==''">
+                <div class="infoNonSub">Click on the Subscriptions button above for subscribing to RSS feeds. {{userName}}</div>
+            </div>
+        </td>
+        <td style="width: 75%; vertical-align: top;">
+            &nbsp;
+        </td>
+    </tr>
+
+    <tr ng-show="subscriptions.length > 0">
+        <td class="subItemListFixed" style="width:20%; vertical-align:top;" id="tdSubscriptionList">
+            <div>
+                <div class="subscriptionsSavedFeeds" ng-hide="savedItems.items.length == 0 || savedItems == ''" ng-click="feedData = savedItems; currentFeedUrl='s';">Saved Items<span ng-hide="savedItems.items.length == 0">&nbsp;({{savedItems.items.length}})</span></div>
+                <div class="subscriptionsAllFeeds" ng-click="getAllItems();">All Feed Items<span ng-hide="totalUnreadCount == 0">&nbsp;({{totalUnreadCount}})</span></div>
+                <div class="horizontalLine">&nbsp;</div>
+                <div class="subscriptionsList" ng-repeat="s in subscriptions" ng-click="openFeed(s);">
+                    {{s.name}}
+                    <span ng-init="updateCount(s.unreadCount)" ng-show="s.unreadCount>0"> ({{s.unreadCount}})</span>
+                </div>
+
+                <input type="hidden" id="currentFeedUrl" />
+            </div>
+        </td>
+        <td class="feedItemListFixed" id="tdFeedList">
+
+            <div ng-show="currentFeedUrl=='' && subscriptions.length > 0">
+                <br />
+                <strong> Click a subscription on the left to view feed items.</strong>
+            </div>
+            
+            <div ng-hide="showMagazine==''">
+                <div style="background-color: #efefef; margin-bottom:2em; padding-bottom:10px;" id="divMagazine">
+                    <div class="feedItemMagazine" ng-repeat="i in feedData.items | filter:feedSearchText" id="divCard{{$index}}" style="{{widthMag($index); }}">
+                        <div class="feedItemMagazineContent">
+
+                            <div ng-show="i.savedItem==1" class="savedItemStar" ng-click="removeFromSavedList(i);">
+                                <img style="cursor:pointer;" src="Images/save.png" alt="Remove from saved items list" title="Remove from saved items list" />
+                            </div>
+
+                            <div ng-show="i.feedName">
+                                <strong>{{i.feedName}}</strong>
+                            </div>
+                            <div>
+                                <a href="{{i.guid}}" target="_blank">{{i.title}}</a>
+                                <strong>{{i.pubDate | fromNow }}</strong>
+                            </div>
+                            <br />
+                            <div style="border-top:1px solid #efefef">&nbsp;</div>
+                            <div ng-bind-html-unsafe="i.description"></div>
+                            <div class="feedItemDescriptionFooter">
+                                <div style="border-top:1px solid #efefef; height:1px;">&nbsp;</div>
+                                <a target="_blank" href="https://plus.google.com/share?url={{i.link}}" onclick="javascript:window.open(this.href,
+                                                  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                                    <img src="Images/gplus-16.png" alt="Share on Google+" title="Share on Google+" />
+                                </a><a href="https://www.facebook.com/sharer/sharer.php?u={{i.link}}" target="_blank" onclick="javascript:window.open(this.href,
+                                                  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                                    <img style="cursor:pointer;" src="Images/facebook.png" alt="Share on Facebook" title="Share on Facebook" />
+                                </a>
+                                <img ng-hide="i.savedItem==1" style="cursor:pointer;" src="Images/unreadstar.png" alt="Save for reading later" title="Save for reading later" ng-click="saveItemForReadingLater(i, feedData.channel[0].title)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="showMagazine==''" id="divFeedList">
+                <div class="feedItem" ng-repeat="i in feedData.items | filter:feedSearchText">
+
+                    <div class="{{feedItemTitleCSS}}" style="{{getBackColor(i.isItemRead)}}" ng-click="showItemDetails(i.guid, $event);markItemAsRead(i);i.isItemRead=1;">
+
+                        <div ng-show="i.savedItem==1" class="savedItemStar" ng-click="removeFromSavedList(i);">
+                            <img style="cursor:pointer;" src="Images/save.png" alt="Remove for saved items list" title="Remove from saved items list" />
+                        </div>
+
+                        <div ng-hide="i.feedName == ''" class="feedNameInAllItems">{{i.feedName}}</div>
+                        <div style="width:70%; display:inline-block;vertical-align:top;">{{i.title}}</div>
+                        <div style="float: right; display: inline-block; vertical-align: top;">{{i.pubDate | fromNow }}&nbsp;&nbsp;</div>
+                    </div>
+                    <div class="feedItemDetails" id="{{i.guid}}" ng-hide="showDescription == ''">
+                        <div class="feedItemDetailsHeader"><a href="{{i.link}}" target="_blank">{{i.title}}</a></div>
+                        <div id="{{i.guid}}">
+                            <div ng-bind-html-unsafe="i.description"></div>
+                        </div>
+
+                        <div class="feedItemDescriptionFooter">
+                            <div style="border-top: 1px solid #efefef; height: 1px;">&nbsp;</div>
+
+                            <a target="_blank" href="https://plus.google.com/share?url={{i.link}}" onclick="javascript:window.open(this.href,
+                                            '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                                <img src="Images/gplus-16.png" alt="Share on Google+" title="Share on Google+" />
+                            </a><a href="https://www.facebook.com/sharer/sharer.php?u={{i.link}}" target="_blank" onclick="javascript:window.open(this.href,
+                                            '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                                <img src="Images/facebook.png" alt="Share on Facebook" title="Share on Facebook" />
+                            </a>
+                            <img ng-hide="i.savedItem==1" style="cursor:pointer;" src="Images/unreadstar.png" alt="Save for reading later" title="Save for reading later" ng-click="saveItemForReadingLater(i, feedData.channel[0].title)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="divNewSubscriptionForm" class="newsubscription" ng-show="waachakFactory.showFeedDiscoveryDialog()=='1'">
+    <div id="divSubPopUp">
+        <div>
+            <div ng-click="currentSubscriptionTab=3;secondTabTitle='';getDefaultSubscriptions();" class="{{currentTabStyle(3)}}">Feed Discovery</div>
+            <div ng-click="currentSubscriptionTab=1;secondTabTitle=''" class="{{currentTabStyle(1)}}">My Subscriptions</div>
+            <div ng-click="currentSubscriptionTab=2" class="{{currentTabStyle(2)}}" ng-show="secondTabTitle!=''">{{secondTabTitle}}</div>            
+
+            <div ng-click="waachakFactory.setShowFeedDiscoveryDialog('')" style="float:right; margin-top:-10px;">
+                <img src="Images/close.png" style="width: 20px;" ng-click="sortSubscriptions()" />
+            </div>
+        </div>
+        <div ng-show="currentSubscriptionTab == 1" class="currentTabContents">
+            <table style="width:100%;">
+                <thead>
+                    <tr class="tblHeader">
+                        <th style="text-align:left;width:35%;">Feed Name</th>
+                        <th style="text-align: left; width:55%;">Feed Url</th>
+                        <th style="width:5%;" colspan="2"><div class="blueButton" ng-click="addEditSubscription('Add Subscription')">New feed</div></th>
+
+                    </tr>
+                </thead>
+                <tbody class="tblbody" id="columns">
+                    <tr ng-repeat="s in subscriptions" draggable="true" id="columnRow" class="column">
+                        <td style="width:35%;" id="sortColName">{{s.name}}</td>
+                        <td style="width:55%;" id="sortColUrl">{{s.url}}<span style="display:none;" id="sortColID">{{s.ID}}</span></td>
+                        <td style="width:5%;">
+                            <div class="edit-pencil" ng-click="addEditSubscription('Edit Subscription', s)"></div>
+                        </td>
+                        <td style="width:5%;">
+                            <div class="delete-record" ng-click="deleteSubscription(s);"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-show="currentSubscriptionTab == 3" class="currentTabContents">
+            <table style="width:100%;">
+                <thead>
+                    <tr class="tblHeader">
+                        <th style="text-align:left;width:35%;">Known Feeds</th>
+                    </tr>
+                </thead>
+                <tbody class="tblbody">
+                    <tr ng-repeat="s in defaultSubscriptions">
+                        <td class="{{getDefaultFeedCSS(s.isCategory)}}">
+                            <div style="display:inline-block;width:200px; ">{{s.name}}</div>
+                            <div ng-show="s.isCategory == 0" class="{{isSubscribed(s.alreadySubscribed)}}" ng-click="addSubscriptionC(s)">Subscribe</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div ng-show="currentSubscriptionTab == 2" class="currentTabContents">
+
+            <table style="width:100%;">
+                <tr style="display:none;">
+                    <td>Create as folder?</td>
+                    <td>
+                        <input type="checkbox" ng-model="newSubscription.IsFolder">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:40%; text-align:right;">
+                        Name:
+                    </td>
+                    <td style="width:60%">
+                        <input type="text" ng-model="newSubscription.name" style="width:85%" />
+                    </td>
+                </tr>
+                <tr ng-hide="newSubscription.IsFolder == true">
+                    <td style="text-align: right;">Feed Url:</td>
+                    <td>
+                        <input type="text" ng-model="newSubscription.url" style="width:85%" />
+                    </td>
+                </tr>
+                <tr ng-hide="Folders==''">
+                    <td>Display under</td>
+                    <td>
+                        <select ng-model="newSubscription.ParentFolder" ng-options="obj.id as obj.name for obj in Folders">
+                            <option value="0">-- None --</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center;">
+                        <br />
+                        <input type="hidden" ng-model="newSubscription.ID" />
+                        <br />
+                        <div ng-click="addSubscriptionC(newSubscription);currentTabStyle(1);" class="blueButton" style="display:inline-block;">Save</div>
+
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="wachakDBModelStoreContainer" CdmEntityContainer="wachakDBEntities">
+    <EntitySetMapping Name="Subscriptions">
+      <EntityTypeMapping TypeName="wachakDBModel.Subscription">
+        <MappingFragment StoreEntitySet="Subscription">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WaachakUsers">
+      <EntityTypeMapping TypeName="wachakDBModel.WaachakUser">
+        <MappingFragment StoreEntitySet="WaachakUser">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="User_Name" ColumnName="User Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FeedDetails">
+      <EntityTypeMapping TypeName="wachakDBModel.FeedDetail">
+        <MappingFragment StoreEntitySet="FeedDetails">
+          <ScalarProperty Name="feedItemRead" ColumnName="feedItemRead" />
+          <ScalarProperty Name="feedLink" ColumnName="feedLink" />
+          <ScalarProperty Name="feedGUID" ColumnName="feedGUID" />
+          <ScalarProperty Name="SubscriptionID" ColumnName="SubscriptionID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

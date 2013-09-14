@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Waachak Feed Link</title>
+    <link href="Styles/common.css" rel="stylesheet" type="text/css">
+
+    <link rel="shortcut icon" href="/images/icon.jpg" />
+    <script src="scripts/jquery-1.10.2.min.js"></script>
+    <script src="scripts/signin.js"></script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            name = getParameterByName("feed");
+            if (name)
+                window.location.href = name;
+        });
+
+    </script>
+</head>
+<body>
+    
+            <div class="header">
+                <div class="logo">waachak</div>
+            </div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="waachDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="FeedItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="link" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+    <Property Name="pubDate" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="guid" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
+    <Property Name="userID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="savedForReading" />
+    <Property Type="String" Name="feedName" MaxLength="512" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Subscription">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Type="Int32" Name="IsFolder" />
+    <Property Type="Int32" Name="ParentFolder" />
+    <Property Type="Int32" Name="SortNumber" />
+  </EntityType>
+  <EntityType Name="WaachakUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserID" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Type="String" Name="UserPassword" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="UserToken" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="UserEmail" MaxLength="512" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="waachakDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="FeedItems" EntityType="Self.FeedItem" />
+    <EntitySet Name="Subscriptions" EntityType="Self.Subscription" />
+    <EntitySet Name="WaachakUsers" EntityType="Self.WaachakUser" />
+    <EntitySet Name="DefaultFeeds" EntityType="waachDBModel.DefaultFeed" />
+  </EntityContainer>
+  <EntityType Name="DefaultFeed">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="name" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="feedurl" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="isCategory" />
+    <Property Type="String" Name="sortIndicator" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

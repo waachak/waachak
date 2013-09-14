@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="waachDBModelStoreContainer" CdmEntityContainer="waachakDBEntities">
+    <EntitySetMapping Name="FeedItems">
+      <EntityTypeMapping TypeName="waachDBModel.FeedItem">
+        <MappingFragment StoreEntitySet="FeedItem">
+          <ScalarProperty Name="feedName" ColumnName="feedName" />
+          <ScalarProperty Name="savedForReading" ColumnName="savedForReading" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="link" ColumnName="link" />
+          <ScalarProperty Name="pubDate" ColumnName="pubDate" />
+          <ScalarProperty Name="guid" ColumnName="guid" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subscriptions">
+      <EntityTypeMapping TypeName="waachDBModel.Subscription">
+        <MappingFragment StoreEntitySet="Subscription">
+          <ScalarProperty Name="SortNumber" ColumnName="SortNumber" />
+          <ScalarProperty Name="ParentFolder" ColumnName="ParentFolder" />
+          <ScalarProperty Name="IsFolder" ColumnName="IsFolder" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WaachakUsers">
+      <EntityTypeMapping TypeName="waachDBModel.WaachakUser">
+        <MappingFragment StoreEntitySet="WaachakUser">
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserToken" ColumnName="UserToken" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="User_Name" ColumnName="User Name" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DefaultFeeds">
+      <EntityTypeMapping TypeName="waachDBModel.DefaultFeed">
+        <MappingFragment StoreEntitySet="DefaultFeeds">
+          <ScalarProperty Name="sortIndicator" ColumnName="sortIndicator" />
+          <ScalarProperty Name="isCategory" ColumnName="isCategory" />
+          <ScalarProperty Name="feedurl" ColumnName="feedurl" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,55 @@
+﻿body {
+    background-color:#faf9f5;
+}
+
+/* header */
+.header {
+    background:#c46f17;
+    border-bottom:1px solid orange;
+}
+
+.header2 {
+    background:#faf9f5;
+}
+
+.userName {
+    color:wheat;
+}
+
+.feedSearch #msg {
+        color:black;
+    }
+
+.logo {
+    color:wheat;
+}
+
+.feedItemTitleRead {
+    background-color:rgba(243,243,243,1.0);
+    border-bottom:1px solid #e5e5e5;
+}
+
+.footer {
+     background-color:white;
+ }
+
+.msg {
+    color:wheat;
+}
+
+.subscriptionsList {
+    color:brown;
+}
+
+.subscriptionsAllFeeds {
+    color:brown;
+}
+
+.footer {
+    color:maroon;
+    background-color:#faf9f5;
+}
+
+.waachakUserHeader {
+    background-color: #faf9f5;
+}
