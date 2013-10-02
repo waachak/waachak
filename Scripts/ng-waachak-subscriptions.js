@@ -1,5 +1,5 @@
 waachakApp.controller("subscriptionController", function ($scope, $http, $route, $routeParams, $location, waachakFactory) {
-
+    debugger;
     $scope.waachakFactory = waachakFactory;
     $scope.loading = '';
     $scope.newSubscription = waachakFactory.newSubscription();
@@ -65,10 +65,11 @@ waachakApp.controller("subscriptionController", function ($scope, $http, $route,
     }
 
     $scope.addSubscriptionC = function (newSubscription) {
+        debugger;
         if (validateUrl(newSubscription.url)) {
             blnAdd = true;
             if (newSubscription.ID && newSubscription.ID != 0 && newSubscription.ID != '') {
-                blnAdd = false;
+               // blnAdd = false;
             }
             else {
                 for (i = 0; i < $scope.subscriptions.length; i++) {
@@ -106,6 +107,11 @@ waachakApp.controller("subscriptionController", function ($scope, $http, $route,
         }
     };
     
+    $scope.resizeContent = function () {
+        resizeContent();
+    }
+
+
     $scope.removeFromSavedList = function (item) {
         item.savedForReading = -1;
         $scope.markItemAsRead(item);
@@ -170,6 +176,7 @@ waachakApp.controller("subscriptionController", function ($scope, $http, $route,
     }
 
     $scope.updateSubscriptionCounts = function () {
+        $scope.loading = 'loading';
         waachakFactory.updateSubscriptionCounts($scope, $http);
     }
     

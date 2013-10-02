@@ -32,11 +32,11 @@
     </div>
 </div>   
 
-<table class="contentTable">
+<table class="contentTable" style="margin-bottom:3em;">
     <tr ng-hide="subscriptions.length > 0">
         <td style="width: 25%; vertical-align: top;">
-            <div ng-show="loading==''">
-                <div class="infoNonSub">Click on the Subscriptions button above for subscribing to RSS feeds. {{userName}}</div>
+            <div ng-show="currentFeedUrl=='' && loading=='' ">
+                <div class="infoNonSub"><br />Click on the Subscriptions button above for subscribing to RSS feeds. {{userName}}</div>
             </div>
         </td>
         <td style="width: 75%; vertical-align: top;">
@@ -50,7 +50,7 @@
                 <div class="subscriptionsSavedFeeds" ng-hide="savedItems.items.length == 0 || savedItems == ''" ng-click="feedData = savedItems; currentFeedUrl='s';">Saved Items<span ng-hide="savedItems.items.length == 0">&nbsp;({{savedItems.items.length}})</span></div>
                 <div class="subscriptionsAllFeeds" ng-click="getAllItems();">All Feed Items<span ng-hide="totalUnreadCount == 0">&nbsp;({{totalUnreadCount}})</span></div>
                 <div class="horizontalLine">&nbsp;</div>
-                <div class="subscriptionsList" ng-repeat="s in subscriptions" ng-click="openFeed(s);">
+                <div class="subscriptionsList" ng-repeat="s in subscriptions" ng-click="openFeed(s);" ng-init="resizeContent()">
                     {{s.name}}
                     <span ng-init="updateCount(s.unreadCount)" ng-show="s.unreadCount>0"> ({{s.unreadCount}})</span>
                 </div>
@@ -64,7 +64,7 @@
                 <br />
                 <strong> Click a subscription on the left to view feed items.</strong>
             </div>
-            
+
             <div ng-hide="showMagazine==''">
                 <div style="background-color: #efefef; margin-bottom:2em; padding-bottom:10px;" id="divMagazine">
                     <div class="feedItemMagazine" ng-repeat="i in feedData.items | filter:feedSearchText" id="divCard{{$index}}" style="{{widthMag($index); }}">
@@ -140,7 +140,7 @@
 <div id="divNewSubscriptionForm" class="newsubscription" ng-show="waachakFactory.showFeedDiscoveryDialog()=='1'">
     <div id="divSubPopUp">
         <div>
-            <div ng-click="currentSubscriptionTab=3;secondTabTitle='';getDefaultSubscriptions();" class="{{currentTabStyle(3)}}">Feed Discovery</div>
+            <div ng-click="currentSubscriptionTab=3;secondTabTitle='';getDefaultSubscriptions();" class="{{currentTabStyle(3)}}">Quick Feed Discovery</div>
             <div ng-click="currentSubscriptionTab=1;secondTabTitle=''" class="{{currentTabStyle(1)}}">My Subscriptions</div>
             <div ng-click="currentSubscriptionTab=2" class="{{currentTabStyle(2)}}" ng-show="secondTabTitle!=''">{{secondTabTitle}}</div>            
 
@@ -158,7 +158,7 @@
 
                     </tr>
                 </thead>
-                <tbody class="tblbody" id="columns">
+                <tbody class="tblbody" id="columns" ng-init="getDraggableRows();">
                     <tr ng-repeat="s in subscriptions" draggable="true" id="columnRow" class="column">
                         <td style="width:35%;" id="sortColName">{{s.name}}</td>
                         <td style="width:55%;" id="sortColUrl">{{s.url}}<span style="display:none;" id="sortColID">{{s.ID}}</span></td>

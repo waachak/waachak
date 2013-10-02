@@ -63,6 +63,18 @@ namespace Wachak.Controllers
                                    guid = item.Element("link").Value
                                };
 
+                    if (vRet != null && !vRet.Any())
+                    {
+                        XNamespace n = @"http://www.w3.org/2005/Atom";
+                        XElement xe = XElement.Load(i.url);
+                        
+                        vRet = from item in xe.Elements(n + "entry")
+                               select new
+                               {
+                                    guid = item.Element(n + "link").Attribute("href").Value
+                               };
+                    }
+
                     var vDbItems = from dbi in db.FeedItems
                                    where dbi.userID == value.userID
                                    select new { guid = dbi.guid };

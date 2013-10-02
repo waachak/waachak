@@ -38,8 +38,8 @@ namespace Wachak.Controllers
 
                 // get user ID from Google
                 string jsonResponse = string.Empty;
-                string strUrl = @"https://graph.facebook.com/oauth/access_token?client_id=YOUR ID HERE&redirect_uri=http://waachak.apphb.com/Index.html&client_secret=YOUR CODE HERE&code=" + value;
-                //string strUrl = @"https://graph.facebook.com/oauth/access_token?client_id=YOUR ID HERE&redirect_uri=http://localhost:51041/Index.html&client_secret=YOUR CODE HERE&code=" + value;
+                string strUrl = @"https://graph.facebook.com/oauth/access_token?client_id=&redirect_uri=http://waachak.apphb.com/Index.html&client_secret=&code=" + value;
+                //string strUrl = @"https://graph.facebook.com/oauth/access_token?client_id=&redirect_uri=http://localhost:51041/Index.html&client_secret=&code=" + value;
 
 
                 // Create the request’s URI.
@@ -64,7 +64,7 @@ namespace Wachak.Controllers
                 if (!string.IsNullOrEmpty(access_token))
                 {
                     jsonResponse = string.Empty;
-                    strUrl = @"https://graph.facebook.com/debug_token?input_token=" + access_token + @"&access_token=TOKEN HERE";
+                    strUrl = @"https://graph.facebook.com/debug_token?input_token=" + access_token + @"&access_token=1378698169025736|Uo87Duy5AOndE7RYij2Jrtt_U2I";
                     // Create the request’s URI.
                     serviceUri = new Uri(strUrl, UriKind.Absolute);
 

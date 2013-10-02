@@ -32,8 +32,8 @@ namespace Wachak.Classes
             if (string.IsNullOrEmpty(strValue))
                 return "";
          
-            string sharedSecret = "YOUR KEY HERE";
-            byte[] _salt = Encoding.ASCII.GetBytes("YOUR SALT HERE");
+            string sharedSecret = "";
+            byte[] _salt = Encoding.ASCII.GetBytes("");
 
             RijndaelManaged aesAlg = null;              // RijndaelManaged object used to encrypt the data.
 

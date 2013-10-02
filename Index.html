@@ -62,9 +62,22 @@
 
                 </div>
     
-                <div ng-view>
+                <div ng-view >
 
                 </div>
+                
+                <div class="footer">
+                    <div id="divThemeSelector" class="themeSelector">
+                        <div ng-click="setTheme(1)" style="{{getThemeFontWeight('Styles/common.css')}}">Aakasha Theme</div>
+                        <div ng-click="setTheme(2)" style="{{getThemeFontWeight('Styles/office.css'); }}">Satva Theme</div>
+                        <div ng-click="setTheme(3)" style="{{getThemeFontWeight('Styles/brown.css'); }}">Yoga Theme</div>
+                    </div>
+                    
+                    <span ng-click="showHideAbout('block')">About</span>
+
+                    <span class="setTheme"  ng-click="setTheme(0)" ng-hide="user.userName==''">Set Theme</span>
+                </div>
+
                 <div class="waachakAbout" id="about">
                     <div>
                         <img src="Images/close.png" style="width: 20px;  float:right;" ng-click="showHideAbout('none')" />
@@ -90,17 +103,6 @@
                     </div>
                 </div>
 
-                <div class="footer">
-                    <div id="divThemeSelector" class="themeSelector">
-                        <div ng-click="setTheme(1)" style="{{getThemeFontWeight('Styles/common.css')}}">Aakasha Theme</div>
-                        <div ng-click="setTheme(2)" style="{{getThemeFontWeight('Styles/office.css'); }}">Satva Theme</div>
-                        <div ng-click="setTheme(3)" style="{{getThemeFontWeight('Styles/brown.css'); }}">Yoga Theme</div>
-                    </div>
-                    
-                    <span ng-click="showHideAbout('block')">About</span>
-
-                    <span class="setTheme"  ng-click="setTheme(0)" ng-hide="user.userName==''">Set Theme</span>
-                </div>
             </div>       
         </div>
 </body>

@@ -125,7 +125,9 @@
     <Content Include="Styles\office.css" />
     <Content Include="Index.html" />
     <Content Include="Waachak.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Crypto.cs" />

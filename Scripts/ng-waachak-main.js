@@ -113,8 +113,9 @@ waachakApp.factory('waachakFactory', function ($http) {
                 user.authToken = data.authToken;
                 user.userImageUrl = data.userImageUrl;
                 feedData = '';
-                if (data.authToken)
-                    getSubscriptions();
+                if (data.authToken) {
+                    $scope.allowNewUserEntry(user);
+                }
                 else
                     alert("Failed to add user. Please try a different user name.");
 
@@ -294,7 +295,7 @@ waachakApp.factory('waachakFactory', function ($http) {
                     }).success(function (data, status) {
                         $scope.subscriptions = data;
                         gotOnce = 1;
-                        $scope.loading = '';
+                        //$scope.loading = '';
                     }).
                         error(function (data, status) {
                             $scope.loading = '';
@@ -347,7 +348,7 @@ waachakApp.factory('waachakFactory', function ($http) {
                     $scope.newSubscription.ID = '';
 
                     $scope.updateSubscriptionCounts($scope, $http);
-                    $scope.loading = '';
+                    //$scope.loading = '';
                     $scope.currentSubscriptionTab = 1;
                     $scope.secondTabTitle = '';
                 }).error(function (data, status) {
@@ -499,6 +500,9 @@ waachakApp.filter('fromNow', function () {
 
         if (d.getDate() == (new Date()).getDate())
             return hours[d.getHours()].toString() + ":" + d.getMinutes() + amPM;
+        else if (d.getDate() + 7 <= (new Date()).getDate() ) {
+            return monthNames[d.getMonth()] + " " + d.getDate() + ", " + d.getUTCFullYear();
+        }
         else
             return daysInWeek[d.getDay()]; // + " " + monthNames[d.getMonth()] + " " + d.getDate() + ", " + " " + hours[d.getHours()].toString() + ":" + d.getMinutes() + amPM;
     };

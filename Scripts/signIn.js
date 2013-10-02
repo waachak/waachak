@@ -10,7 +10,7 @@
         angular.element(document.getElementById('divSubscriptions')).scope().signInFacebookUser(fbCode);
         return;
     }
-
+       
     resizeContent();
 }
 
@@ -26,8 +26,8 @@ function readCookie(name) {
 }
 
 function loginWithFaceBook(){
-    window.location = "https://www.facebook.com/dialog/oauth?client_id=YOUR ID HERE&redirect_uri=http://waachak.apphb.com/Index.html";
-    //window.location = "https://www.facebook.com/dialog/oauth?client_id=YOUR ID HERE&redirect_uri=http://localhost:51041/Index.html";
+    window.location = "https://www.facebook.com/dialog/oauth?client_id=&redirect_uri=http://waachak.apphb.com/Index.html";
+    //window.location = "https://www.facebook.com/dialog/oauth?client_id=&redirect_uri=http://localhost:51041/Index.html";
 }
 
 function getParameterByName(name) {

@@ -99,6 +99,7 @@ namespace Wachak.Controllers
                     {
                         List<Wachak.Subscription> vFeedUrls = (from fu in db.Subscriptions
                                                                where fu.UserID == sub.userID
+                                                               orderby fu.SortNumber
                                                                select fu).ToList();
 
                         foreach (Wachak.Subscription feedUrl in vFeedUrls)
@@ -118,7 +119,7 @@ namespace Wachak.Controllers
                             if (vRet != null && vRet.Count == 0)
                             {
                                 XNamespace n = @"http://www.w3.org/2005/Atom";
-                                XElement xe = XElement.Load(sub.url);
+                                XElement xe = XElement.Load(feedUrl.Url);
                                 strAtomTitle = xe.Element(n + "title").Value;
 
                                 vRet = (from item in xe.Elements(n + "entry")
